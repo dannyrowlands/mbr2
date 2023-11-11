@@ -81,7 +81,9 @@ class HotelBooking extends Component
             $this->room_type != '' &&
             $this->start != ''&&
             $this->nights != '' &&
-            $this->number_of_pax != ''
+            $this->number_of_pax != '' &&
+            $this->nights > 0 &&
+            $this->nights < 8
         )
         {
             $this->show_data_table = true;
@@ -103,12 +105,12 @@ class HotelBooking extends Component
                     $this->chosen_datas[] = [
                         'date' => $date,
                         'details' => $details,
-                        'daily_cost' => $cost*$this->number_of_rooms.' USD',
+                        'daily_cost' => number_format($cost*$this->number_of_rooms, 2).' USD',
                     ];
                 }
                 $increment++;
             }
-            $this->total_cost = $cost*$this->number_of_rooms*$this->nights;
+            $this->total_cost = number_format($cost*$this->number_of_rooms*$this->nights, 2);
         }
     }
 
