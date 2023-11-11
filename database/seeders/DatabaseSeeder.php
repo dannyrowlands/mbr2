@@ -21,11 +21,21 @@ class DatabaseSeeder extends Seeder
         foreach(Hotel::all() as $hotel) {
             $i = 0;
             do {
-                RoomType::factory()->create([
-                    'hotel_id' => $hotel->id,
-                    'type' => fake()->safeColorName
-                ]);
-                $i++;
+                $room_type = fake()->safeColorName;
+                if (
+                    !RoomType::
+                    where('hotel_id', '=' ,$hotel->id)
+                    ->where('type', '=', $room_type)
+                    ->first()
+                )
+                {
+                    RoomType::factory()->create([
+                        'hotel_id' => $hotel->id,
+                        'type' => $room_type
+                    ]);
+                    $i++;
+                }
+
             } while ($i < rand(3, 10));
         }
 
