@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Hotel;
+use App\Models\Room;
+use App\Models\RoomType;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +15,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        Hotel::factory(10)->create();
+
+        foreach(Hotel::all() as $hotel) {
+            $i = 0;
+            do {
+                RoomType::factory()->create([
+                    'hotel_id' => $hotel->id,
+                    'type' => fake()->safeColorName
+                ]);
+                $i++;
+            } while ($i < rand(3, 10));
+        }
+
+        Room::factory(200)->create();
     }
 }
