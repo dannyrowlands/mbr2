@@ -84,7 +84,7 @@ class HotelBooking extends Component
             $this->nights != '' &&
             $this->number_of_pax != '' &&
             $this->nights > 0 &&
-            $this->nights < 8
+            $this->nights < 7
         )
         {
             $this->show_data_table = true;
