@@ -54,6 +54,7 @@ class HotelBooking extends Component
      */
     public function setRoomTypes()
     {
+        $this->room_type = null;
         $this->room_types = RoomType::where('hotel_id', '=', $this->hotel)->get();
         $this->getTableData();
     }
