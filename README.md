@@ -12,6 +12,15 @@ Navigate to root of the project then
 * Run `npm install`
 * Run `npm run build`
 * Run `./vendor/bin/sail up -d` (_**Allow time for newly built Sail Docker image to fully come up before issuing next command. Will fail with MySQL error if you don't**_.)
+
+If running this after a previous build do these extra steps......
+
+(
+1. Run `./vendor/bin/sail mysql`
+2. Run `drop database mybookingrewards2`
+3. Run `exit`
+
+)
 * Run `./vendor/bin/sail artisan migrate`
 * Run `./vendor/bin/sail artisan db:seed`
 
