@@ -187,7 +187,6 @@
 
         <div class="grid grid-cols-1">
             <button
-{{--                wire:confirm="Are you happy with the booking's details?"--}}
                 wire:click="submit"
                 type="button"
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 rounded"
