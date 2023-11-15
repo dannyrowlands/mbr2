@@ -9,6 +9,7 @@ use Carbon\CarbonPeriod;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use JetBrains\PhpStorm\NoReturn;
 use Livewire\Component;
 use Livewire\Attributes\Rule;
 
@@ -39,14 +40,43 @@ class HotelBooking extends Component
     public $show_notes_validation = false;
     public $show_data_table = false;
 
+    public function mount()
+    {
+        $this->hotels = Hotel::all();
+    }
+
+    public function updated($item, $value)
+    {
+        switch ($item) {
+            case 'hotel':
+                $this->setRoomTypes();
+                break;
+            case 'room_type':
+                $this->getTableData();
+                break;
+            case 'dates':
+            case 'nights':
+            case 'number_of_pax':
+                $this->setNotesMandatory();
+                $this->setNumNights();
+                break;
+            case 'number_of_rooms':
+                $this->changeChosenDates();
+                break;
+        }
+    }
 
     /**
      * @return Application|Factory|View|\Illuminate\Foundation\Application
      */
     public function render()
     {
-        $this->hotels = Hotel::all();
         return view('livewire.hotel-booking');
+    }
+
+    private function setNotesMandatory()
+    {
+        $this->number_of_pax > 1 ? $this->show_notes_validation = true : $this->show_notes_validation = false;
     }
 
     /**
@@ -69,6 +99,7 @@ class HotelBooking extends Component
         $end = new Carbon($this->end);
         $this->nights = $start->diffInDays($end);
         $this->days = $start->diffInDays($end)+1;
+        $this->getTableData();
     }
 
     /**
@@ -81,12 +112,12 @@ class HotelBooking extends Component
             $this->hotel != '' &&
             $this->room_type != '' &&
             $this->start != ''&&
-            $this->nights != '' &&
             $this->number_of_pax != '' &&
             $this->nights > 0 &&
             $this->nights < 7
         )
         {
+
             $this->show_data_table = true;
             $this->chosen_datas = [];
             $start = new Carbon($this->start);

@@ -7,8 +7,7 @@
                 <div>
                     <select
                         class="form-control w-96"
-                        wire:model="hotel"
-                        wire:change="setRoomTypes"
+                        wire:model.live="hotel"
                     >
 
                         <option>-- Select Hotel --</option>
@@ -35,9 +34,8 @@
                 <label for="type">Room type *</label>
                 <div>
                     <select
-                        wire:model="room_type"
+                        wire:model.live="room_type"
                         class="form-control w-96"
-                        wire:change="getTableData()"
                     >
 
                         <option value="">-- Select Room Type --</option>
@@ -64,8 +62,7 @@
                         size="41"
                         name="daterange"
                         id="daterange"
-                        wire:model="dates"
-                        wire:blur="getTableData()"
+                        wire:model.live="dates"
                     />
                     <div class="text-red-600">
                         @error('dates') <em>{{ $message }}</em>@enderror
@@ -81,8 +78,7 @@
                         @endif
                         type="text"
                         size="41"
-                        wire:model="nights"
-                        wire:change="changeChosenDates()"
+                        wire:model.live="nights"
                     />
                     <div class="text-red-600">
                         @error('nights') <em>{{ $message }}</em>@enderror
@@ -96,8 +92,7 @@
                 <div>
                     <select
                         class="form-control w-96"
-                        wire:model="number_of_rooms"
-                        wire:change="getTableData()"
+                        wire:model.live="number_of_rooms"
                     >
 
                         <option value="">-- Select Number of Rooms --</option>
@@ -120,8 +115,7 @@
                     <select
                         class="form-control w-96"
                         name="numberOfPax"
-                        wire:model="number_of_pax"
-                        wire:change="changeNumberPax('NP')"
+                        wire:model.live="number_of_pax"
                     >
 
                         <option value="">-- Select Number of Pax --</option>
@@ -150,7 +144,7 @@
                 <textarea
                     cols="87"
                     class="rounded-md"
-                    wire:model="notes"
+                    wire:model.live="notes"
                 ></textarea>
                 <div class="text-red-600">
                     @error('notes') <em>{{ $message }}</em>@enderror
