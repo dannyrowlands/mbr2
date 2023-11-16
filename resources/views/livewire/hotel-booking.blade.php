@@ -198,7 +198,7 @@
             autoApply: true,
             autoUpdateInput: false,
             maxSpan: {
-                "days": 6
+                "days": 7
             },
         }, function(start, end, label) {
             @this.start = start;

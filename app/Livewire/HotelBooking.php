@@ -26,7 +26,7 @@ class HotelBooking extends Component
     public $start = '';
     public $end = "";
     public $days = null;
-    #[Rule('required|numeric|min:1|max:6', message:'Please let us know how many nights you wish to stay.')]
+    #[Rule('required|numeric|min:1|max:7', message:'Please let us know how many nights you wish to stay.')]
     public $nights = null;
     #[Rule('required|numeric|min:1|max:2', message:'Please tell us how many rooms you need.')]
     public $number_of_rooms = 1;
@@ -58,13 +58,13 @@ class HotelBooking extends Component
             case 'hotel':
                 $this->setRoomTypes();
                 break;
+            case 'dates':
             case 'room_type':
                 $this->getTableData();
                 break;
             case 'number_of_pax':
                 $this->setNotesMandatory();
                 break;
-            case 'dates':
             case 'nights':
             case 'number_of_rooms':
                 $this->changeChosenDates();
@@ -115,7 +115,7 @@ class HotelBooking extends Component
             $this->start != ''&&
             $this->number_of_pax != '' &&
             $this->nights > 0 &&
-            $this->nights < 7
+            $this->nights < 8
         )
         {
 
