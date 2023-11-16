@@ -61,13 +61,11 @@ class HotelBooking extends Component
             case 'room_type':
                 $this->getTableData();
                 break;
-            case 'dates':
-            case 'nights':
-                $this->changeChosenDates();
-                break;
             case 'number_of_pax':
                 $this->setNotesMandatory();
                 break;
+            case 'dates':
+            case 'nights':
             case 'number_of_rooms':
                 $this->changeChosenDates();
                 break;
