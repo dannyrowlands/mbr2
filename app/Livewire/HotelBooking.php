@@ -64,7 +64,6 @@ class HotelBooking extends Component
             case 'dates':
             case 'nights':
                 $this->changeChosenDates();
-                $this->setNumNights();
                 break;
             case 'number_of_pax':
                 $this->setNotesMandatory();
