@@ -9,7 +9,6 @@ use Carbon\CarbonPeriod;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use JetBrains\PhpStorm\NoReturn;
 use Livewire\Component;
 use Livewire\Attributes\Rule;
 
@@ -40,11 +39,19 @@ class HotelBooking extends Component
     public $show_notes_validation = false;
     public $show_data_table = false;
 
+    /**
+     * @return void
+     */
     public function mount()
     {
-        $this->hotels = Hotel::all();
+        $this->getHotels();
     }
 
+    /**
+     * @param $item
+     * @param $value
+     * @return void
+     */
     public function updated($item, $value)
     {
         switch ($item) {
@@ -56,9 +63,11 @@ class HotelBooking extends Component
                 break;
             case 'dates':
             case 'nights':
+                $this->changeChosenDates();
+                $this->setNumNights();
+                break;
             case 'number_of_pax':
                 $this->setNotesMandatory();
-                $this->setNumNights();
                 break;
             case 'number_of_rooms':
                 $this->changeChosenDates();
@@ -72,11 +81,6 @@ class HotelBooking extends Component
     public function render()
     {
         return view('livewire.hotel-booking');
-    }
-
-    private function setNotesMandatory()
-    {
-        $this->number_of_pax > 1 ? $this->show_notes_validation = true : $this->show_notes_validation = false;
     }
 
     /**
@@ -105,7 +109,7 @@ class HotelBooking extends Component
     /**
      * @return void
      */
-    public function getTableData()
+    private function getTableData()
     {
         $this->show_data_table = false;
         if(
@@ -178,5 +182,21 @@ class HotelBooking extends Component
     {
         $this->validate();
         dd('Form Submitted');
+    }
+
+    /**
+     * @return void
+     */
+    private function getHotels()
+    {
+        $this->hotels = Hotel::all();
+    }
+
+    /**
+     * @return void
+     */
+    private function setNotesMandatory()
+    {
+        $this->number_of_pax > 1 ? $this->show_notes_validation = true : $this->show_notes_validation = false;
     }
 }
