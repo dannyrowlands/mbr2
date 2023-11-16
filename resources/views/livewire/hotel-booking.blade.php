@@ -78,7 +78,7 @@
                         @endif
                         type="text"
                         size="41"
-                        wire:model.live="nights"
+                        wire:model.live.debounce.500ms="nights"
                     />
                     <div class="text-red-600">
                         @error('nights') <em>{{ $message }}</em>@enderror
